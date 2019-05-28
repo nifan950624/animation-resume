@@ -1,5 +1,5 @@
-.token.comment, .token.function, .token.property, .token.punctuation, .token.selector {
-    color: black;
+.token.function, .token.property, .token.punctuation, .token.selector {
+    color: inherit;
 }
 
 * {
@@ -8,21 +8,32 @@
 }
 
 #code {
-    box-sizing: border-box;
-    overflow: hidden;
-    height: 100vh;
+    overflow-y: auto;
+    height: 100%;
     width: 100%;
+    overflow-x: hidden;
 }
 
 #paper>pre {
     width: 100%;
     height: 100%;
     padding: 20px;
+    color:black;
+}
+
+#paper>div{
+    height: 100%;
+    color:black;
+}
+
+ol{
+    list-style: none;
 }
 
 body {
     display: flex;
-    box-sizing: border-box;
+    height: 90vh;
+    overflow: hidden;
 }
 
 @keyframes breath {
