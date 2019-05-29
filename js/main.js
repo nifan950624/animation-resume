@@ -14,7 +14,7 @@ var result = `
   body{
     padding: 30px;  
     color: white;
-    background-color: rgb(20,60,60); 
+    background-color: rgb(0,40,40); 
   } 
 
   #code{
@@ -45,13 +45,13 @@ var result = `
 
   #code{
     animation: breath 0.5s infinite alternate-reverse;
-    transform: rotateY(15deg) translateZ(-100px) ;
+    transform: translateX(30px) rotateY(15deg) translateZ(-150px);
+    width: 50%;
   } 
   `
 var result2 = `
   /*下面开始写我的简历，首先我需要一张白纸让它在页面的右边*/
   #code{
-    width: 50%;
     height: 100%;
     margin-right: 30px;
   }
@@ -103,22 +103,41 @@ var result4 = `
     padding:10px 0
   }
   `
+var time = 50;
 
+$('.btns').on('click', 'button', function (e) {
+  let $button = $(e.currentTarget);
+  let speed = $button.attr('data')
+  $($button).css({'transition':'all 0.35s'}).addClass('active')
+    .siblings().removeClass('active')
+  switch (speed) {
+    case 'slow':
+      time = 100;
+      break;
+    case 'normal':
+      time = 50;
+      break;
+    case 'fast':
+      time = 0;
+      break;
+  }
+})
 
 function markDown(md, fn) {
   var pre = document.createElement('pre')
   paper.appendChild(pre)
   var content = document.querySelector('#paper>pre')
   n = 0
-  var id = setInterval(() => {
+  var id = setTimeout(function run() {
     n++
     content.innerHTML = md.substring(0, n)
     content.scrollTop = content.scrollHeight;
-    if (n >= md.length) {
-      window.clearInterval(id)
-      fn.call()
+    if (n <= md.length) {
+      setTimeout(run, time)
+    } else {
+      fn && fn.call()
     }
-  }, 50)
+  }, time)
 }
 
 
@@ -126,16 +145,17 @@ function writeCode(preResult, result, fn) {
   document
   var code = document.querySelector('#code')
   n = 0
-  var id = setInterval(() => {
+  var id = setTimeout(function run() {
     n++
     code.innerHTML = Prism.highlight(preResult + result.substring(0, n), Prism.languages.css, 'css');
     code.scrollTop = code.scrollHeight;
     style.innerHTML = preResult + result.substring(0, n);
-    if (n >= result.length) {
-      window.clearInterval(id)
-      fn.call()
+    if (n <= result.length) {
+      setTimeout(run, time)
+    } else {
+      fn && fn.call()
     }
-  }, 50)
+  }, time)
 }
 
 
@@ -145,9 +165,7 @@ writeCode('', result, () => {
     markDown(md, () => {
       writeCode(result + result2, result3, () => {
         markdownToHTML()
-        writeCode(result + result2 + result3, result4, () => {
-
-        })
+        writeCode(result + result2 + result3, result4)
       })
     })
   })
@@ -166,7 +184,7 @@ function markdownToHTML() {
   div = document.createElement('div');
   paper.replaceChild(div, content)
   paper.appendChild(div);
-  div.innerHTML = marked(`
+  div.innerHTML = `
   <h1>我叫倪凡</h1>
   <p>年龄：24</p>
   <p>来自武汉纺织大学</p>
@@ -178,6 +196,5 @@ function markdownToHTML() {
       <li><a href="https://nifan950624.github.io/canvas-demo/" target="_blank">个人画板</a></li>
       <li><a href="" target="_blank">简历></a></li>
   </ol>
-  `)
-
+  `
 }

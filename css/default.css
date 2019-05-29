@@ -18,15 +18,15 @@
     width: 100%;
     height: 100%;
     padding: 20px;
-    color:black;
+    color: black;
 }
 
-#paper>div{
+#paper>div {
     height: 100%;
-    color:black;
+    color: black;
 }
 
-ol{
+ol {
     list-style: none;
 }
 
@@ -41,6 +41,67 @@ body {
         box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
     }
     100% {
-        box-shadow: -1px 1px 10px 1px rgba(0, 0, 0, 0.4);
+        box-shadow: -1px 1px 10px 1px rgba(255, 255, 255, 0.4);
     }
+}
+
+.btns {
+    position: absolute;
+    top: 40px;
+    right: 50px;
+    display: flex;
+    flex-direction: column;
+}
+
+.btns button {
+    margin: 6px;
+    outline: none;
+    border: 1px black solid;
+    padding: 1px 4px;
+    background: linear-gradient(to bottom, rgba(102, 152, 203, 1) 0%, rgba(92, 138, 184, 1) 100%);
+    font-size: 12px;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    border: transparent solid 2px;
+    border-radius:7px;
+}
+
+.btns>button.active {
+    border: rgb(170, 0, 100) solid 2px;
+}
+
+#code::-webkit-scrollbar-thumb:horizontal {
+    /*水平滚动条的样式*/
+    width: 4px;
+    background-color: #CCCCCC;
+    border-radius: 6px;
+}
+
+#code::-webkit-scrollbar-track-piece {
+    border-radius: 0;
+    /*滚动条的圆角宽度*/
+}
+
+#code::-webkit-scrollbar {
+    width: 4px;
+    /*滚动条的宽度*/
+    height: 5px;
+    /*滚动条的高度*/
+}
+
+#code::-webkit-scrollbar-thumb:vertical {
+    height: 50px;
+    background-color: #999;
+    border-radius: 4px;
+    outline: 2px solid #fff;
+    outline-offset: -2px;
+    border: 2px solid #fff;
+}
+
+#code::-webkit-scrollbar-thumb:hover {
+    /*滚动条的hover样式*/
+    height: 50px;
+    background-color: #9f9f9f;
+    border-radius: 4px;
 }
